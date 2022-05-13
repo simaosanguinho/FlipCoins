@@ -111,8 +111,6 @@ void freqCoins(Coin head, int n_coins)
     
 }
 
-
-
 int main()
 {
     int coin_num;
