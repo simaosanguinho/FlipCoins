@@ -5,6 +5,8 @@
 #define HEADS 1
 #define TAILS 0
 
+#define GRAPH_BAR_DIM   100
+
 /* global variables */
 double freq_tails, freq_heads;
 
@@ -55,6 +57,29 @@ Coin flipCoins(Coin head, int n)
     return head;
 }
 
+/* prints an horizontal graph bar */
+void printBar(double n)
+{
+    int num;
+
+    num =  (int) (n*GRAPH_BAR_DIM);
+    
+    for(int i=0; i<num; i++)
+        printf("=");
+
+    printf("\n");
+}
+
+/* builds a frequency horizontal bar */
+void freqGraph(double freq_heads, double freq_tails)
+{
+    printf("HEADS: ");
+    printBar(freq_heads);
+    printf("TAILS: ");
+    printBar(freq_tails);
+
+}
+
 /* calculates the frequency of heads and tails */
 void freqCoins(Coin head, int n_coins)
 {
@@ -77,21 +102,23 @@ void freqCoins(Coin head, int n_coins)
     freq_heads = n_heads/(double)n_coins;
     freq_tails = n_tails/(double)n_coins;
 
-    printf("HEADS: %f TAILS: %f\n", freq_heads, freq_tails);
+    printf("\nPercentages: \n");
+    printf("HEADS: %.2f %% \nTAILS: %.2f %% \n", 
+        freq_heads*100, freq_tails*100);
+
+    printf("\nBar Graph: \n");
+    freqGraph(freq_heads, freq_tails);
     
 }
 
-void freqGraph()
-{
 
-    printf("------HEADS vs TAILS------\n\n");
-}
 
 int main()
 {
     int coin_num;
     Coin head = NULL;
 
+    
     /* makes it random outcome different every time program is executed */
     srand(time(0));
 
@@ -103,6 +130,7 @@ int main()
     freqCoins(head, coin_num);
 
     freeList(head);
+
 
     return 0;
 }
